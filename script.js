@@ -6,3 +6,10 @@ function computerPlay() {
 }
 
 console.log(computerPlay());
+
+function playerPlay() {
+  let playerSelection = prompt('Rock, Paper, or Scissors?');
+  return playerSelection.toLowerCase();
+}
+
+console.log(playerPlay());
