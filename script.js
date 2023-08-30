@@ -1,3 +1,6 @@
+let playerScore = 0;
+let computerScore = 0;
+
 let rps = ['rock', 'paper', 'scissors'];
 
 function computerPlay() {
@@ -17,20 +20,42 @@ function playRound(playerPlay, computerPlay) {
   if (player === computer) {
     return "It's a tie!";
   } else if (player === 'rock' && computer === 'scissors') {
+    playerScore++;
     return 'You win! Rock beats scissors.';
   } else if (player === 'paper' && computer === 'rock') {
+    playerScore++;
     return 'You win! Paper beats rock.';
   } else if (player === 'scissors' && computer === 'paper') {
+    playerScore++;
     return 'You win! Scissors beats paper.';
   } else if (player === 'rock' && computer === 'paper') {
+    computerScore++;
     return 'You lose! Paper beats rock.';
   } else if (player === 'paper' && computer === 'scissors') {
+    computerScore++;
     return 'You lose! Scissors beats paper.';
   } else if (player === 'scissors' && computer === 'rock') {
+    computerScore++;
     return 'You lose! Rock beats scissors.';
   } else {
     return 'Invalid input.';
   }
 }
 
-console.log(playRound(playerPlay(), computerPlay()));
+function game() {
+  for (let i = 0; i < 5; i++) {
+    console.log(playRound(playerPlay(), computerPlay()));
+    console.log('Player Score: ' + playerScore);
+    console.log('Computer Score: ' + computerScore);
+  }
+
+  if (playerScore > computerScore) {
+    return 'You win!';
+  } else if (playerScore < computerScore) {
+    return 'You lose!';
+  } else {
+    return "It's a tie!";
+  }
+}
+
+console.log(game());
