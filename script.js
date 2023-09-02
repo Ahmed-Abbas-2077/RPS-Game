@@ -58,20 +58,42 @@ function game() {
   }
 }
 
-let choices = document.querySelectorAll('.choice');
 
-choices.forEach((choice) => {
-  choice.addEventListener('click', () => {
-    let player = choice.id;
-    let computer = computerPlay();
-    let result = playRound(player, computer);
-    let playerScoreDisplay = document.querySelector('#player-score');
-    let computerScoreDisplay = document.querySelector('#computer-score');
-    let resultDisplay = document.querySelector('#result');
-    playerScoreDisplay.textContent = playerScore;
-    computerScoreDisplay.textContent = computerScore;
-    resultDisplay.textContent = result;
+document.addEventListener('DOMContentLoaded', () => {
+  let choices = document.querySelectorAll('.choice');
+  choices.forEach((choice) => {
+    choice.addEventListener('click', () => {
+      // we get the player's choice and the computer's choice and pass it to playRound() to determine the winner
+      let player = choice.id;
+      let computer = computerPlay();
+      let result = playRound(player, computer);
+      // we get the player's score and the computer's score and display it on the screen
+      let playerScoreDisplay = document.querySelector('#user-score');
+      let computerScoreDisplay = document.querySelector('#computer-score');
+      let resultDisplay = document.querySelector('.result');
+      playerScoreDisplay.textContent = playerScore;
+      computerScoreDisplay.textContent = computerScore;
+      if (result) {
+        resultDisplay.textContent = result;
+      }
+      if (playerScore === 5) {
+        resultDisplay.textContent = 'You have won!';
+        resultDisplay.classList.add('won');
+        playerScore = 0;
+        computerScore = 0;
+        choices.forEach((choice) => {
+          choice.classList.add('disabled');
+        });
+      } else if (computerScore === 5) {
+        resultDisplay.textContent = 'You have lost!';
+        resultDisplay.classList.add('lost');
+        playerScore = 0;
+        computerScore = 0;
+        choices.forEach((choice) => {
+          choice.classList.add('disabled');
+        });
+      }
+    });
   });
 });
-
 
