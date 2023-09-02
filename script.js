@@ -58,4 +58,20 @@ function game() {
   }
 }
 
-console.log(game());
+let choices = document.querySelectorAll('.choice');
+
+choices.forEach((choice) => {
+  choice.addEventListener('click', () => {
+    let player = choice.id;
+    let computer = computerPlay();
+    let result = playRound(player, computer);
+    let playerScoreDisplay = document.querySelector('#player-score');
+    let computerScoreDisplay = document.querySelector('#computer-score');
+    let resultDisplay = document.querySelector('#result');
+    playerScoreDisplay.textContent = playerScore;
+    computerScoreDisplay.textContent = computerScore;
+    resultDisplay.textContent = result;
+  });
+});
+
+
